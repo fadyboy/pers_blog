@@ -2,6 +2,7 @@
 
 from app import app
 from flask import render_template
+from forms import CategoryForm, InterestForm
 
 @app.route('/')
 @app.route('/home')
