@@ -1,1 +1,19 @@
 {% extends 'base.html' %}
+
+{% block content %}
+<h3 id="category_header">Add new Interest category</h3>
+<!-- form to add category -->
+<form action="" method="POST" name="">
+    {{form.hidden_tag()}}
+    <p>Enter Interest category:</p>
+    {{form.category(size=50)}}
+    <br />
+    <input type="submit" value="create Interest category">
+</form>
+<!-- Display interest category name if created-->
+{% if message %}
+<strong>{{message}}</strong>
+ {% endif %}
+
+
+{% endblock %}

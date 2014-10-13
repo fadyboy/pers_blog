@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Add new interest</h3>
+<form action="/add_page" method="post">
+    {{form.hidden_tag()}}
+    Enter Interest title:
+    {{form.title}} <br />
+    Enter url for interest page:
+    {{form.url}} <br />
+    Select an Interest Category:
+    {{form.category}} <br />
+
+    <input type="submit" value="Add Interest">
+    <br />
+    {% if message %}
+    <strong>{{message}} interest page added</strong>
+    {% endif %}
+</form>
+
+{% endblock %}

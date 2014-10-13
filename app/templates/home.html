@@ -1,1 +1,13 @@
 {% extends 'base.html' %}
+
+{% block content %}
+<h3>Welcome..</h3>
+<p>
+    Please see the list of current interest categories we have. Click on a link to see further details
+</p>
+ <ul>
+{% for cat in category %}
+     <li><a href="/{{cat.url}}">{{cat.name}}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}
