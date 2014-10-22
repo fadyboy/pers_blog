@@ -53,8 +53,10 @@ def interests():
 
         # catch database integrity exception if duplicate category added
         try:
+
             db.session.add(new_category)
             db.session.commit()
+            #db.session.flush()
             message = "{} category added".format(new_category)
         except IntegrityError:
             message = "Category already exists!"
@@ -70,20 +72,27 @@ def interests():
 def category_name(category_name):
     category = decode_url(category_name)
 
-    return render_template('category.html', category=category)
+    # first get all the category objects
+    categories = db.session.query(Category).all()
+    for cat in categories:
+        category_id = cat.id
+
+
+    # add functionality to display pages for the category
+    # query db and filter by category
+    category_pages = db.session.query(Interests).filter(Interests.category_id == category_id)
+
+    return render_template('category.html', category=category, category_pages=category_pages, title=category)
 
 # view to add and interest page to an interest category
 @app.route('/add_page', methods=['GET', 'POST'])
 def add_page():
-    # get all categories in database
-    # categories = db.session.query(Category).all()
     # create an instance of the page interests form
     form = InterestForm(request.form)
-    #form.category.choices = form.set_category_choices()
-    #form.category.choices = [(choice.id, choice.name) for choice in categories]
-    # form.set_category_choices()
     message = ""
 
+    form.refresh()
+    print form.category.choices, 'choices'
     if form.validate_on_submit():
         interest_page = Interests(form.title.data, form.url.data, form.category.data)
         db.session.add(interest_page)
@@ -93,5 +102,5 @@ def add_page():
     else:
         form = InterestForm()
 
-
     return render_template('add_page.html', form=form, message=message)
+

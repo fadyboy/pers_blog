@@ -13,14 +13,17 @@ class CategoryForm(Form):
 # create Interest form class to add details of the actual interests to categories
 
 class InterestForm(Form):
-    # create list of categories by querying db
-    categories = db.session.query(Category).all()
     title = TextField('title')
     url = TextField('url')
-    category = SelectField('category', choices=[(choice.id, choice.name) for choice in categories])
+    category = SelectField('category', choices=[])
 
-    # def set_category_choices(self):
-    #     self.category.choices = db.session.query(Category).all()
-    #     return self.category.choices
+    # create method to refresh list of categories when instance of form created
+
+    def __init__(self, *args, **kwargs):
+        Form.__init__(self, *args, **kwargs)
+        self.refresh()
+
+    def refresh(self):
+        self.category.choices = [(unicode(choice.id), choice.name) for choice in db.session.query(Category).all()]
 
 

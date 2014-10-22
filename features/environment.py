@@ -5,8 +5,8 @@ from selenium import webdriver
 
 # run before each test
 def before_all(context):
-    context.selenium_logger = logging.getLogger('selenium.webdriver.remote.remote_connection')
-    context.selenium_logger.setLevel(logging.WARN)
+    selenium_logger = logging.getLogger('selenium.webdriver.remote.remote_connection')
+    selenium_logger.setLevel(logging.WARN)
     context.browser = webdriver.Firefox()
     # context.response = context.browser.get('http://localhost:5000')
 

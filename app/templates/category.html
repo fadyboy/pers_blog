@@ -3,6 +3,21 @@
 {% block content %}
   <h3>{{category}}</h3>
   <p>Welcome to the {{category}} interest page</p>
+  <!-- Display information of category interest pages if they exist-->
+
+    {% if category_pages %}
+    {% for pages in category_pages %}
+    Here are the current interests
+    <ul>
+        <li>{{pages.title}}</li>
+    </ul>
+    {% endfor %}
+    {% else %}
+    <div id="no_results">
+        No interest pages added yet, click link below to add
+    </div>
+    {% endif %}
+
 
   <!-- Link to add specific interests pages to the Interest category  -->
   <a href="/add_page">Add Interest page</a>

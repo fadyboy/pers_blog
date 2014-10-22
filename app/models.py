@@ -39,7 +39,7 @@ class Interests(db.Model):
     id = db.Column(db.Integer, db.Sequence('interest_id'), primary_key=True)
     title = db.Column(db.String(100))
     url = db.Column(db.String(100))
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id')) #remove _id from category
 
     def __init__(self, title, url, category_id):
         self.title = title

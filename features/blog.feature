@@ -11,11 +11,14 @@ Feature: Confirming that Blog homepage, About page, and Special Interest page di
         When I click the About page hyperlink
         Then I am taken to the About page
 
-    Scenario: The Special Interests page is displayed when navigated to
+    Scenario: The Add Interests page is displayed when navigated to
         Given that I am on the Home page
-        When I click the Special Interests hyperlink
-        Then I am taken to the Special Interests page
+        When I click the Add Interests hyperlink
+        Then I am taken to the Add Interests page
 
-    Scenario: The question to vote for is displayed on the homepage
-        Given that I am on the homepage for the blog site
-        Then I will see the question for the day
+    Scenario: An interest category is added and displayed on the homepage when I add a new interest category
+        Given that I am on the add interest page
+        When I add a new interest category and click the submit button
+        Then the new category is added and listed in the homepage
+
+

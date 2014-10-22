@@ -1,6 +1,11 @@
 # test steps for the blog feature
+#from behave import *
 
 # step for scenario navigate to the blog home page
+@Given(u'that I have a web browser open')
+def step_impl(context):
+    pass
+
 @When(u'I type in the url for the blog website and press enter')
 def step_impl(context):
     # launch browser and go to home page
@@ -11,5 +16,43 @@ def step_impl(context):
 @Then(u'I am taken to the homepage for the blog website')
 def step_impl(context):
     br = context.browser
-    br.gt('http://localhost:5000')
-    assert br.title == 'Personal Blog'
+    br.get('http://localhost:5000')
+    assert "Home" in br.title
+
+# step for scenario to navigate to the About Me page
+@Given(u'that I on the Home page')
+def step_impl(context):
+    context.browser.get('http://localhost:5000')
+
+@When(u'I click the About page hyperlink')
+def step_impl(context):
+    br = context.browser
+    about_link = br.find_element_by_link_text('About Me')
+    about_link.click()
+
+
+@Then(u'I am taken to the About page')
+def step_impl(context):
+    br = context.browser
+    assert "About" in br.title
+
+# steps for scenario to navigate to the Add interests pag
+@Given(u'Given that I am on the Home page')
+def step_impl(context):
+    #context.browser.get('http://localhost:5000')
+    br = context.browser
+    br.get('http://localhost:5000')
+
+
+@When(u'When I click the Add Interests hyperlink')
+def step_impl(context):
+    br = context.browser
+    add_interest_link = br.find_element_by_link_text('Add Interests')
+    add_interest_link.click()
+
+@Then(u'')
+def step_impl(context):
+    br = context.browser
+    assert "Interest" in br.title
+
+
