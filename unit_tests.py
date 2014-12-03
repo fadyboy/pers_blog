@@ -52,9 +52,55 @@ class AppTests(unittest.TestCase):
 
     # create test to add interest pages to categories
     def add_interest_page_test(self):
-        pass
+        interest_page = Interests("test_title", "http://test.com", 3)
+        db.session.add(interest_page)
+        db.session.commit()
 
-    # create test to display interest page details in interest category page
+        # check title and url exist in category
+        self.assertEqual("test_title", interest_page.title)
+        self.assertEqual("http://test.com", interest_page.url)
+
+    # create test to display list of interest page details for interest category page
+    # the list is based on the interest category
     def display_interest_in_category_page_test(self):
-        pass
+        # create category
+        current_category = Category('Test_category')
+        other_category =Category('Other_category')
 
+        # add and commit databases to db
+        db.session.add_all([current_category, other_category])
+        db.session.commit()
+
+        current_category_id = current_category.id
+        other_category_id = other_category.id
+
+        # add interest page
+        interest1 = Interests("Test", "http://test.com", current_category_id)
+        interest2 = Interests("Test2", "http://test2.com", current_category_id)
+        interest3 = Interests("Test3", "http://test3.com",other_category_id)
+
+        # add and commit interests to database
+        db.session.add_all([interest1, interest2, interest3])
+        db.session.commit()
+
+        # return interest pages details based on current category
+        pages = db.session.query(Interests).filter(Interests.category_id == current_category_id)
+        # verify that all pages have the same category id
+        for page in pages:
+            self.assertEqual(current_category_id, page.category_id)
+
+        # verify that pages do not belong to other category
+        for page in pages:
+            self.assertNotEqual(other_category_id, page.category_id)
+
+    def no_interests_in_category_test(self):
+        # create category
+        current_category = Category("Test_category")
+        db.session.add(current_category)
+        db.session.commit()
+
+        interest = Interests("Test", "http://test.com", 1)
+
+        # check that there are no interest pages in category and that list is empty
+        pages = db.session.query(Interests).filter(Interests.category_id == 1).all()
+        self.assertEqual([], pages)

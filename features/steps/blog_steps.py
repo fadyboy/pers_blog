@@ -36,7 +36,7 @@ def step_impl(context):
     br = context.browser
     assert "About" in br.title
 
-# steps for scenario to navigate to the Add interests pag
+# steps for scenario to navigate to the Add interests page
 @Given(u'Given that I am on the Home page')
 def step_impl(context):
     #context.browser.get('http://localhost:5000')
@@ -54,5 +54,19 @@ def step_impl(context):
 def step_impl(context):
     br = context.browser
     assert "Interest" in br.title
+
+# scenario to add an interest category that displays on homepage
+@Given(u'that I am on the add interest page')
+def step_impl(context):
+    br = context.browser
+    br.get('http://localhost:5000/interests')
+
+@When(u'I add a new interest category in the category text field and click the submit button')
+def step_impl(context):
+    pass
+
+@Then(u'the new category is added and listed in the homepage')
+def step_impl(context):
+    pass
 
 

@@ -8,11 +8,15 @@
     <p>Enter Interest category:</p>
     {{form.category(size=50)}}
     <br />
+    <!-- add code to display error message -->
+    {% for error in form.category.errors %}
+    <i>{{error}}</i><br />
+    {% endfor %}
     <input type="submit" value="create Interest category">
 </form>
 <!-- Display interest category name if created-->
 {% if message %}
-<strong>{{message}}</strong>
+<strong><i>{{message}}</i></strong>
  {% endif %}
 
 

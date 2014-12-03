@@ -9,7 +9,7 @@ class Category(db.Model):
     __tablename__ = 'category'
 
     id = db.Column(db.Integer, db.Sequence('category_id'), primary_key=True)
-    name = db.Column(db.String(50), unique=True) # make this field required
+    name = db.Column(db.String(50), unique=True)
 
     def __init__(self, name):
         self.name = name

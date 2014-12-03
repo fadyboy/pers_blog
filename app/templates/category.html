@@ -5,11 +5,11 @@
   <p>Welcome to the {{category}} interest page</p>
   <!-- Display information of category interest pages if they exist-->
 
-    {% if category_pages %}
-    {% for pages in category_pages %}
+    {% if category_pages != [] %}
     Here are the current interests
+    {% for pages in category_pages %}
     <ul>
-        <li>{{pages.title}}</li>
+        <li><a href="{{pages.url}}" target="_blank">{{pages.title}}</a></li>
     </ul>
     {% endfor %}
     {% else %}
@@ -20,5 +20,6 @@
 
 
   <!-- Link to add specific interests pages to the Interest category  -->
-  <a href="/add_page">Add Interest page</a>
+
+  <p><a href="/add_page">Add Interest page</a></p>
 {% endblock %}

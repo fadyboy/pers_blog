@@ -6,8 +6,14 @@
     {{form.hidden_tag()}}
     Enter Interest title:
     {{form.title}} <br />
+    {% for error in form.title.errors %}
+    <i>{{error}}</i><br />
+    {% endfor %}
     Enter url for interest page:
     {{form.url}} <br />
+    {% for error in form.url.errors %}
+    <i>{{error}}</i><br />
+    {% endfor %}
     Select an Interest Category:
     {{form.category}} <br />
 

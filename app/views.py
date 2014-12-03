@@ -2,7 +2,7 @@
 
 from app import app
 from app import db
-from flask import render_template, request
+from flask import render_template, request, flash
 from forms import CategoryForm, InterestForm
 from models import Category, Interests
 from sqlalchemy.exc import IntegrityError
@@ -49,20 +49,17 @@ def interests():
     message = ""
 
     if form.validate_on_submit():
+
         new_category = Category(form.category.data)
 
         # catch database integrity exception if duplicate category added
         try:
-
             db.session.add(new_category)
             db.session.commit()
-            #db.session.flush()
             message = "{} category added".format(new_category)
+
         except IntegrityError:
-            message = "Category already exists!"
-    # create an empty instance of form if no form submitted
-    else:
-        form = CategoryForm()
+            message = "{} category already exists!".format(new_category)
 
 
     return render_template('interests.html', title='Interests', form=form, message=message)
@@ -72,15 +69,9 @@ def interests():
 def category_name(category_name):
     category = decode_url(category_name)
 
-    # first get all the category objects
-    categories = db.session.query(Category).all()
-    for cat in categories:
-        category_id = cat.id
+    test_cat = db.session.query(Category).filter_by(name=category).first()
 
-
-    # add functionality to display pages for the category
-    # query db and filter by category
-    category_pages = db.session.query(Interests).filter(Interests.category_id == category_id)
+    category_pages = db.session.query(Interests).filter(Interests.category_id == test_cat.id).all()
 
     return render_template('category.html', category=category, category_pages=category_pages, title=category)
 
@@ -99,8 +90,8 @@ def add_page():
         db.session.commit()
         message = "{} interest page added".format(interest_page)
 
-    else:
-        form = InterestForm()
 
     return render_template('add_page.html', form=form, message=message)
+
+
 
