@@ -1,0 +1,89 @@
+/*
+   This is the main stylesheet for styling of the site
+*/
+
+/*
+=====================
+Grid
+=====================
+*/
+
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.main-container {
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 960px;
+}
+
+.top-header {
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.top-header a {
+    border: 1px solid darkolivegreen;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.top-header hr {
+    margin-top: 10px;
+}
+
+footer {
+    position: absolute;
+    bottom: 5px;
+    padding-right: 20px;
+    width: 940px;
+}
+
+.block-content {
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin: 0px;
+    padding: 5px;
+}
+
+h3 {
+    color: darkolivegreen;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: red;
+}
+/*
+body {
+    margin: 10px;
+    padding: 10px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+footer {
+    position: absolute;
+    bottom: 5px;
+    width: 97%;
+
+}
+
+.hr-bottom {
+    position: relative;
+    bottom: 1px;
+}
+*/

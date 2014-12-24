@@ -3,6 +3,8 @@
 __pycache__/
 *.py[cod]
 
+# Test databases
+*.db
 
 # C extensions
 *.so

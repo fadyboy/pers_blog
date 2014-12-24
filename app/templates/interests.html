@@ -1,22 +1,23 @@
-{% extends 'base.html' %}
+{% extends 'base1.html' %}
 
 {% block content %}
 <h3 id="category_header">Add new Interest category</h3>
 <!-- form to add category -->
-<form action="" method="POST" name="">
+<form action="" method="POST">
     {{form.hidden_tag()}}
     <p>Enter Interest category:</p>
-    {{form.category(size=50)}}
+    {{form.category(size=30)}}
     <br />
     <!-- add code to display error message -->
     {% for error in form.category.errors %}
-    <i>{{error}}</i><br />
+    <i class="error-msg">{{error}}</i><br />
     {% endfor %}
-    <input type="submit" value="create Interest category">
+    <!--<input type="submit" value="create Interest category">-->
+    <button type="submit" class="btn">Create</button>
 </form>
 <!-- Display interest category name if created-->
 {% if message %}
-<strong><i>{{message}}</i></strong>
+<strong class="feedback-msg"><i>{{message}}</i></strong>
  {% endif %}
 
 

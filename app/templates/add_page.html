@@ -1,26 +1,27 @@
-{% extends 'base.html' %}
+{% extends 'base1.html' %}
 
 {% block content %}
 <h3>Add new interest</h3>
-<form action="/add_page" method="post">
+<form action="/add_page" method="post" class="form-group">
     {{form.hidden_tag()}}
-    Enter Interest title:
+    Enter Interest title:<br />
     {{form.title}} <br />
     {% for error in form.title.errors %}
-    <i>{{error}}</i><br />
+    <i class="error-msg">{{error}}</i><br />
     {% endfor %}
-    Enter url for interest page:
+    Enter url for interest page:<br />
     {{form.url}} <br />
     {% for error in form.url.errors %}
-    <i>{{error}}</i><br />
+    <i class="error-msg">{{error}}</i><br />
     {% endfor %}
-    Select an Interest Category:
+    Select an Interest Category:<br />
     {{form.category}} <br />
 
-    <input type="submit" value="Add Interest">
+    <!--<input type="submit" value="Add Interest">-->
+    <button type="submit" class="btn">Add</button>
     <br />
     {% if message %}
-    <strong>{{message}}</strong>
+    <strong class="feedback-msg">{{message}}</strong>
     {% endif %}
 </form>
 

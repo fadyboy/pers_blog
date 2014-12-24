@@ -7,6 +7,7 @@ from forms import CategoryForm, InterestForm
 from models import Category, Interests
 from sqlalchemy.exc import IntegrityError
 import urllib
+from datetime import datetime
 
 
 # add functions to create urls for the Category pages
@@ -92,6 +93,13 @@ def add_page():
 
 
     return render_template('add_page.html', form=form, message=message)
+
+@app.template_filter()
+def get_current_year(*args):
+    current_date = datetime.now()
+    year = current_date.year
+
+    return year
 
 
 
